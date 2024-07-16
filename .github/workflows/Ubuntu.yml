@@ -31,21 +31,11 @@ jobs:
         run: cmake --help
 
       - name: ⚙️ run-cmake (configure)
-        if: ${{ matrix.cmake_version >= '17' }}
-        uses: cmake-tools/run-cmake@v0-alpha
-        id: 'configure_ninja_multi_config'
-        with:
-          mode: configure
-          generator: 'Ninja Multi-Config'
-          install_prefix: '../install'
-
-      - name: ⚙️ run-cmake (configure)
-        if: ${{ matrix.cmake_version < '17' }}
         uses: cmake-tools/run-cmake@v0-alpha
         id: 'configure_ninja'
         with:
           mode: configure
-          generator: 'Ninja'
+          generator: ${{ matrix.cmake_version < '17' && 'Ninja' || 'Ninja Multi-Config' }}
           install_prefix: '../install'
 
       - name: 🛠️ run-cmake (build)

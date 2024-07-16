@@ -5,6 +5,9 @@ project(runs.test)
 include(CTest)
 include(CPack)
 
+message("CMake: ${CMAKE_VERSION}")
+message("Generator: ${CMAKE_GENERATOR}")
+
 message(STATUS "Options:")
 message(STATUS "\t- source_dir : ${CMAKE_SOURCE_DIR}")
 message(STATUS "\t- binary_dir : ${CMAKE_BINARY_DIR}")
