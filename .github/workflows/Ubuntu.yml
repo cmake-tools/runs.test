@@ -14,7 +14,7 @@ jobs:
     name: Prepare
     steps:
       - name: Install libidn12
-        if: ${{ matrix.cmake_version }} <=2
+        if: ${{ matrix.cmake_version }} <=3
         run: sudo apt-get update ; sudo apt-get install --no-install-recommends -y libidn12; sudo ln -s  /usr/lib/x86_64-linux-gnu/libidn.so.12 /usr/lib/x86_64-linux-gnu/libidn.so.11
     
   ninja:
