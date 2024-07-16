@@ -16,6 +16,12 @@ jobs:
       fail-fast: false
       matrix:
         cmake_version: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+        configurations: ['Debug','Release','RelWithDebInfo','MinSizeRel','']
+        generators: ['Unix Makefiles','Ninja', 'Ninja Multi-Config' ]
+        exclude:
+          - cmake_version: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+            generators: 'Ninja Multi-Config'
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,8 +41,10 @@ jobs:
         id: 'configure_ninja'
         with:
           mode: configure
-          generator: ${{ matrix.cmake_version < '17' && 'Ninja' || 'Ninja Multi-Config' }}
+          generator: ${{ matrix.generators }}
           install_prefix: '../install'
+          variables:
+            CMAKE_BUILD_TYPE:STRING=${{ matrix.cmake_version }}
 
       - name: 🛠️ run-cmake (build)
         uses: cmake-tools/run-cmake@v0-alpha
@@ -44,6 +52,7 @@ jobs:
         with:
           mode: build
           clean_first: true
+          config: ${{ matrix.cmake_version }}
 
       - name: 📥 run-cmake (install)
         uses: cmake-tools/run-cmake@v0-alpha
