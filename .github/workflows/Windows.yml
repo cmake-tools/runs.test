@@ -61,4 +61,5 @@ jobs:
       - name: 📦 run-cpack
         uses: cmake-tools/run-cpack@v0-alpha
         id: pack
-
+        with:
+          generators: 'STGZ;TBZ2'
