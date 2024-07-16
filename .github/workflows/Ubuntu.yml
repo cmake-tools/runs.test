@@ -9,17 +9,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  prepare:
-    runs-on: ubuntu-latest
-    name: Prepare
-    steps:
-      - name: Install libidn12
-        if: ${{ matrix.cmake_version }} <=3
-        run: sudo apt-get update ; sudo apt-get install --no-install-recommends -y libidn12; sudo ln -s  /usr/lib/x86_64-linux-gnu/libidn.so.12 /usr/lib/x86_64-linux-gnu/libidn.so.11
-    
   ninja:
     runs-on: ubuntu-latest
-    needs: prepare
     name:  CMake v3.${{ matrix.cmake_version }} Ninja (${{ matrix.configurations }})
     strategy:
       fail-fast: false
@@ -29,7 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      - name: Install libidn12
+        run: sudo apt-get update ; sudo apt-get install --no-install-recommends -y libidn12; sudo ln -s  /usr/lib/x86_64-linux-gnu/libidn.so.12 /usr/lib/x86_64-linux-gnu/libidn.so.11
       - name: ⬇️ Setup CMake
         uses: lukka/get-cmake@latest
         with:
@@ -73,7 +65,6 @@ jobs:
   
   ninja-multi-config:
     runs-on: ubuntu-latest
-    needs: prepare
     name: CMake v3.${{ matrix.cmake_version }} Ninja Multi-Config (${{ matrix.configurations }})
     strategy:
       fail-fast: false
@@ -84,7 +75,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      - name: Install libidn12
+        run: sudo apt-get update ; sudo apt-get install --no-install-recommends -y libidn12; sudo ln -s  /usr/lib/x86_64-linux-gnu/libidn.so.12 /usr/lib/x86_64-linux-gnu/libidn.so.11
       - name: ⬇️ Setup CMake
         uses: lukka/get-cmake@latest
         with:
@@ -127,7 +119,6 @@ jobs:
 
   make:
     runs-on: ubuntu-latest
-    needs: prepare
     name: CMake v3.${{ matrix.cmake_version }} Unix Makefiles (${{ matrix.configurations }})
     strategy:
       fail-fast: false
@@ -138,7 +129,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      - name: Install libidn12
+        run: sudo apt-get update ; sudo apt-get install --no-install-recommends -y libidn12; sudo ln -s  /usr/lib/x86_64-linux-gnu/libidn.so.12 /usr/lib/x86_64-linux-gnu/libidn.so.11
       - name: ⬇️ Setup CMake
         uses: lukka/get-cmake@latest
         with:
