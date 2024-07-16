@@ -120,7 +120,7 @@ jobs:
         with:
           generators: 'STGZ;TBZ2'
 
-  ninja:
+  make:
     runs-on: ubuntu-latest
     name: CMake v3.${{ matrix.cmake_version }}
     strategy:
