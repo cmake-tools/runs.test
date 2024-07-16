@@ -23,4 +23,11 @@ message(STATUS "\t- AFTER_CACHE_STRING : ${AFTER_CACHE_STRING}")
 message(AUTHOR_WARNING "I'm a warning")
 message(DEPRECATION "I'm a deprecation")
 
+get_cmake_property(_variableNames VARIABLES)
+list (SORT _variableNames)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
+
+
 add_subdirectory(src)
