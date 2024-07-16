@@ -11,7 +11,7 @@ concurrency:
 jobs:
   ninja:
     runs-on: ubuntu-latest
-    name: CMake v3.${{ matrix.cmake_version }}
+    name:  CMake v3.${{ matrix.cmake_version }} Ninja (${{ matrix.configurations }})
     strategy:
       fail-fast: false
       matrix:
@@ -67,7 +67,7 @@ jobs:
   
   ninja-multi-config:
     runs-on: ubuntu-latest
-    name: CMake v3.${{ matrix.cmake_version }}
+    name: CMake v3.${{ matrix.cmake_version }} Ninja Multi-Config (${{ matrix.configurations }})
     strategy:
       fail-fast: false
       matrix:
@@ -122,7 +122,7 @@ jobs:
 
   make:
     runs-on: ubuntu-latest
-    name: CMake v3.${{ matrix.cmake_version }}
+    name: CMake v3.${{ matrix.cmake_version }} Unix Makefiles (${{ matrix.configurations }})
     strategy:
       fail-fast: false
       matrix:
