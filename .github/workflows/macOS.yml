@@ -84,7 +84,7 @@ jobs:
 
       - name: ⚙️ run-cmake (configure)
         uses: cmake-tools/run-cmake@v0-alpha
-        id: 'configure_ninja'
+        id: 'configure_ninja_multi_config'
         with:
           mode: configure
           generator: 'Ninja Multi-Config'
@@ -136,7 +136,7 @@ jobs:
 
       - name: ⚙️ run-cmake (configure)
         uses: cmake-tools/run-cmake@v0-alpha
-        id: 'configure_ninja'
+        id: 'configure_xcode'
         with:
           mode: configure
           generator: 'Xcode'

@@ -92,7 +92,7 @@ jobs:
 
       - name: ⚙️ run-cmake (configure)
         uses: cmake-tools/run-cmake@v0-alpha
-        id: 'configure_ninja'
+        id: 'configure_ninja_multi_config'
         with:
           mode: configure
           generator: 'Ninja Multi-Config'
@@ -147,10 +147,10 @@ jobs:
 
       - name: ⚙️ run-cmake (configure)
         uses: cmake-tools/run-cmake@v0-alpha
-        id: 'configure_ninja'
+        id: 'configure_msvc'
         with:
           mode: configure
-          generator: 'Ninja Multi-Config'
+          generator: 'Visual Studio 17 2022'
           install_prefix: '../install'
 
       - name: 🛠️ run-cmake (build)
