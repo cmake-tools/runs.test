@@ -16,11 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         cmake_version: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
-        configurations: ['Debug','Release','']
-        generators: ['Xcode', 'Ninja Multi-Config' ]
-        exclude:
-          - cmake_version: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-            generators: 'Ninja Multi-Config'
+        configurations: ['Debug','Release','RelWithDebInfo','MinSizeRel','']
  
     steps:
       - name: Checkout
@@ -37,10 +33,10 @@ jobs:
         id: 'configure_ninja'
         with:
           mode: configure
-          generator: ${{ matrix.generators }}
+          generator: 'Ninja'
           install_prefix: '../install'
           variables:
-            CMAKE_BUILD_TYPE:STRING=${{ matrix.cmake_version }}
+            CMAKE_BUILD_TYPE:STRING=${{ matrix.configurations }}
 
       - name: 🛠️ run-cmake (build)
         uses: cmake-tools/run-cmake@v0-alpha
@@ -48,7 +44,7 @@ jobs:
         with:
           mode: build
           clean_first: true
-          config: ${{ matrix.cmake_version }}
+          config: ${{ matrix.configurations }}
 
       - name: 📥 run-cmake (install)
         uses: cmake-tools/run-cmake@v0-alpha
