@@ -117,7 +117,7 @@ jobs:
 
   xcode:
     runs-on: macos-latest
-    name: CMake v3.${{ matrix.cmake_version }}
+    name: CMake v3.${{ matrix.cmake_version }} Xcode (${{ matrix.configurations }})
     strategy:
       fail-fast: false
       matrix:
